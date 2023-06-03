@@ -14,7 +14,7 @@ import java.util.Set;
 public class GetUsersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Set<User> users = Warehouse.getInstance().getUsers();
-        if (users != null) {
+        if (users !=  null) {
             request.setAttribute("users", users);
         }
         request.getRequestDispatcher("/users.jsp").forward(request, response);
