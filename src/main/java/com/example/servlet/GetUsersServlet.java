@@ -16,6 +16,8 @@ public class GetUsersServlet extends HttpServlet {
         Set<User> users = Warehouse.getInstance().getUsers();
         if (users !=  null) {
             request.setAttribute("users", users);
+        }else {
+            request.setAttribute("users", null); // Set attribute to null or handle the null case accordingly
         }
         request.getRequestDispatcher("/users.jsp").forward(request, response);
     }
