@@ -8,10 +8,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Set;
+
 @WebServlet("/users")
 public class GetUsersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("users", Warehouse.getInstance().getUsers());
+        Set<User> users = Warehouse.getInstance().getUsers();
+        if (users != null) {
+            request.setAttribute("users", users);
+        }
         request.getRequestDispatcher("/users.jsp").forward(request, response);
     }
 }
