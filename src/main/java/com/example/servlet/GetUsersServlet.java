@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Set;
 
 @WebServlet("/users")
@@ -17,7 +18,7 @@ public class GetUsersServlet extends HttpServlet {
         if (users !=  null) {
             request.setAttribute("users", users);
         }else {
-            request.setAttribute("users", null); // Set attribute to null or handle the null case accordingly
+            request.setAttribute("users", new ArrayList<User>()); // Set attribute to null or handle the null case accordingly
         }
         request.getRequestDispatcher("/users.jsp").forward(request, response);
     }
