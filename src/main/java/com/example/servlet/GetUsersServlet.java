@@ -1,5 +1,4 @@
 package com.example.servlet;
-
 import com.example.User;
 import com.example.Warehouse;
 
@@ -19,7 +18,10 @@ public class GetUsersServlet extends HttpServlet {
         Set<User> users = Warehouse.getInstance().getUsers();
         req.setAttribute("users", users);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/users.jsp");
-        requestDispatcher.forward(req, resp);
-
+        try {
+            requestDispatcher.forward(req, resp);
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
+        }
     }
 }

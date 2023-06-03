@@ -22,15 +22,21 @@ public class AddUserServlet extends HttpServlet {
         warehouse.addUser(user);
 
         req.setAttribute("user", user);
-        resp.sendRedirect("/add");
 
+        try {
+            resp.sendRedirect("/add");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/add.jsp");
-
-        requestDispatcher.forward(req, resp);
-
+        try {
+            requestDispatcher.forward(req, resp);
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
+        }
     }
 }
