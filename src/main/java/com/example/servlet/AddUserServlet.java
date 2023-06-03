@@ -21,8 +21,7 @@ public class AddUserServlet extends HttpServlet {
         Warehouse warehouse = Warehouse.getInstance();
         warehouse.addUser(user);
 
-        req.setAttribute("userName", firstName);
-        req.setAttribute("lastName", lastName);
+        req.setAttribute("user", user);
 
         try {
             resp.sendRedirect("/add");
