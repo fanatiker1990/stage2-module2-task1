@@ -11,9 +11,7 @@ import java.io.IOException;
 @WebServlet("/users")
 public class GetUsersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        for (User user:Warehouse.getInstance().getUsers()) {
-            request.setAttribute("users", user);
-            request.getRequestDispatcher("/users.jsp").forward(request, response);
-        }
+        request.setAttribute("users", Warehouse.getInstance().getUsers());
+        request.getRequestDispatcher("/users.jsp").forward(request, response);
     }
 }
