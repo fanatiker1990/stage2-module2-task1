@@ -2,6 +2,7 @@ package com.example.servlet;
 import com.example.User;
 import com.example.Warehouse;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,13 +14,14 @@ import java.util.Set;
 
 @WebServlet("/users")
 public class GetUsersServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Set<User> users = Warehouse.getInstance().getUsers();
-        if (users !=  null) {
-            request.setAttribute("users", users);
-        }else {
-            request.setAttribute("users", new ArrayList<User>()); // Set attribute to null or handle the null case accordingly
+        req.setAttribute("users", users);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/users.jsp");
+        try {
+            requestDispatcher.forward(req, resp);
+        } catch (ServletException | IOException e) {
+            e.printStackTrace();
         }
-        request.getRequestDispatcher("/users.jsp").forward(request, response);
     }
 }
